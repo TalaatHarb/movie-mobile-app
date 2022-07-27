@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{currentMovie?.title}}</ion-title>
+    <ion-back-button slot="start" defaultHref="/movies"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="currentMovie">
+    <img [src]="movieService.getImageUrl(currentMovie, 'w400')" alt="Poster">
+    <ion-card-header>
+      <ion-card-title>{{currentMovie.title}}</ion-card-title>
+      <ion-card-subtitle>{{currentMovie.tagline}}</ion-card-subtitle>
+      <ion-text color="tertiary">
+        <span *ngFor="let genere of currentMovie.genres; let isLast = last">
+          {{genere.name}} {{!isLast ? ' . ':''}}
+        </span>
+      </ion-text>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+
+<ion-footer *ngIf="currentMovie?.homepage">
+  <ion-button expand="full" (click)="openHomePage()">Open home page</ion-button>
+</ion-footer>
